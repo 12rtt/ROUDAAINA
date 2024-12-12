@@ -1,0 +1,60 @@
+!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Preview</title>
+    <style>
+        #image {
+            width: 300px;
+            height: 200px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 200px;
+            background-color: #f0f0f0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .preview {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="image">Hover over an image below to display here</div>
+    <br>
+    <img class="preview" src="image1.jpg" alt="Description of image 1" width="100" height="100">
+    <img class="preview" src="image2.jpg" alt="Description of image 2" width="100" height="100">
+    <img class="preview" src="image3.jpg" alt="Description of image 3" width="100" height="100">
+
+    <script>
+        // Function to update the preview area
+        function upDate(previewPic) {
+            console.log("Event triggered"); // Confirm the event
+            console.log("Source:", previewPic.src); // Log the source
+            console.log("Alt:", previewPic.alt); // Log the alt text
+
+            const imageDiv = document.getElementById("image");
+            imageDiv.style.backgroundImage = `url('${previewPic.src}')`;
+            imageDiv.innerHTML = previewPic.alt;
+        }
+
+        // Function to reset the preview area
+        function unDo() {
+            const imageDiv = document.getElementById("image");
+            imageDiv.style.backgroundImage = "";
+            imageDiv.innerHTML = "Hover over an image below to display here";
+        }
+
+        // Add event listeners to preview images
+        const previews = document.querySelectorAll(".preview"); previews.forEach(preview => {
+                preview.addEventListener("mouseover", () => upDate(preview));
+                preview.addEventListener("mouseout", unDo);
+            });
+    </script>
+    </body>
+    
+    </html>
